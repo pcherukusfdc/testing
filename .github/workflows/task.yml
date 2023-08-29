@@ -1,0 +1,26 @@
+name: Task
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download_rpms:
+    name: Downloading_rpms
+    runs-on: [ self-hosted, linux, bt-linux ] 
+    strategy:
+      matrix:
+        #os: ['RedHat', 'CentOS', 'OracleLinux']
+        #os_version: [7, 8, 9]
+        os: ['RedHat']
+        os_version: [9]
+    steps:
+    - id: step1
+      name: Downloading rpms to repositories
+      run: |
+        os_name=${{ matrix.os }}
+        os_ver=${{ matrix.os_version }}
+        echo "${os_name} - - ${os_ver}"
+    - id: step2
+      name: sync
+      run: |
+        echo "rsync"
